@@ -201,8 +201,35 @@ func getAllListingsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// func dashboardHandler(w http.ResponseWriter, r *http.Request) {
+// 	userIDStr := strings.TrimPrefix(r.URL.Path, "/dashboard/")
+// 	userID, err := strconv.Atoi(userIDStr)
+// 	if err != nil {
+// 		log.Println("Invalid userID in dashboard:", userIDStr, err)
+// 		http.Error(w, "Invalid userID", http.StatusBadRequest)
+// 		return
+// 	}
+// 	rows, err := db.Query(`SELECT id, name, description, paymentPerDay, imagePath FROM listings WHERE user_id = ?`, userID)
+// 	if err != nil {
+// 		log.Println("Failed to fetch user listings:", err)
+// 		http.Error(w, "Failed to fetch user listings", http.StatusInternalServerError)
+// 		return
+// 	}
+// 	defer rows.Close()
+// 	for rows.Next() {
+// 		var l Listing
+// 		err := rows.Scan(&l.ID, &l.Name, &l.Description, &l.PaymentPerDay, &l.ImagePath)
+// 		if err != nil {
+// 			log.Println("Error scanning dashboard listing:", err)
+// 			continue
+// 		}
+// 		fmt.Fprintf(w, "ID: %d, Name: %s, Desc: %s, Payment: %d, Image: %s\n",
+// 			l.ID, l.Name, l.Description, l.PaymentPerDay, l.ImagePath)
+// 	}
+// }
+
 func dashboardHandler(w http.ResponseWriter, r *http.Request) {
-	userIDStr := strings.TrimPrefix(r.URL.Path, "/dashboard/")
+	userIDStr := strings.TrimPrefix(r.URL.Path, "/api/dashboard/")
 	userID, err := strconv.Atoi(userIDStr)
 	if err != nil {
 		log.Println("Invalid userID in dashboard:", userIDStr, err)
